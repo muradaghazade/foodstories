@@ -5,8 +5,14 @@ from django.contrib.auth.models import AbstractUser
 # User = get_user_model()
 
 class User(AbstractUser):
+    GENDER_CHOICES = (
+    (1, ("Male")),
+    (2, ("Famale")),
+)
+
     bio = models.TextField(max_length=1000, blank=True)
     profile_pic = models.ImageField(upload_to='images')
+    gender = models.CharField(choices=GENDER_CHOICES, max_length=6)
 
 class Recipe(models.Model):
     title = models.CharField(max_length=200)
