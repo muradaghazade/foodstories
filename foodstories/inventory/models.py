@@ -1,7 +1,12 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AbstractUser
 
-User = get_user_model()
+# User = get_user_model()
+
+class User(AbstractUser):
+    bio = models.TextField(max_length=1000, blank=True)
+    profile_pic = models.ImageField(upload_to='images')
 
 class Recipe(models.Model):
     title = models.CharField(max_length=200)
