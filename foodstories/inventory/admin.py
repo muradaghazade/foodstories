@@ -1,5 +1,5 @@
 from django.contrib import admin
-from inventory.models import Recipe, Author, Comments, Reply
+from inventory.models import Recipe, Comments
 
 # Register your models here.
-admin.site.register([Recipe, Author, Comments, Reply])
+admin.site.register([Recipe, Comments])
