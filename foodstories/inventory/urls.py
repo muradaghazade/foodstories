@@ -4,7 +4,12 @@ from . import views
 
 app_name = 'inventory'
 
+from inventory.views import RecipeView
+
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('recipes', views.recipes, name='recipes'),
+    path('', RecipeView.as_view(), name='recipe-list'),
 ]
+# urlpatterns = [
+#     path('', views.index, name='index'),
+#     path('recipes', views.recipes, name='recipes'),
+# ]
