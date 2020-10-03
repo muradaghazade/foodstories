@@ -7,8 +7,10 @@ app_name = 'inventory'
 from inventory.views import RecipeView
 
 urlpatterns = [
-    path('', RecipeView.as_view(), name='recipe-list'),
+    path('recipes', views.RecipeView.as_view(), name='recipe-list'),
 ]
+
+
 # urlpatterns = [
 #     path('', views.index, name='index'),
 #     path('recipes', views.recipes, name='recipes'),
