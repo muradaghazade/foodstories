@@ -5,8 +5,8 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     GENDER_CHOICES = (
-    (1, ("Male")),
-    (2, ("Female"))
+    ("Male", ("Male")),
+    ("Female", ("Female"))
 )
     bio = models.TextField(max_length=1000, blank=True)
     profile_pic = models.ImageField(upload_to='images')
