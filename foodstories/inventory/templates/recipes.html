@@ -62,17 +62,19 @@
                 </div>
                 <div class="row mt-5">
                     <div class="col text-center">
+                        {% if is_paginated %}
                         <div class="block-27">
                             <ul>
-                                <li><a href="#">&lt;</a></li>
-                                <li class="active"><span>1</span></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">&gt;</a></li>
+                                {% if page_obj.has_previous %}
+                                <li><a href="/recipes?page={{ page_obj.previous_page_number }}">&lt;</a></li>
+                                {% endif %}
+                                <span style="color: black; background-color: white; font-size: 18px; border-radius: 18px; padding: 7px; border: 1px solid #e6e6e6;">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                                {% if page_obj.has_next %}
+                                <li><a href="/recipes?page={{ page_obj.next_page_number }}">&gt;</a></li>
+                                {% endif %}
                             </ul>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -81,9 +83,9 @@
                 <div class="sidebar-wrap">
                     <div class="sidebar-box p-4 about text-center ftco-animate">
                         <h2 class="heading mb-4">About Me</h2>
-                        <img src="" class="img-fluid" alt="Colorlib Template">
+                        <img src="{{ author.profile_pic.url }}" class="img-fluid" alt="Colorlib Template">
                         <div class="text pt-4">
-                            <p>Hi! My name is <strong>Cathy Deon</strong>, behind the word mountains, far from the
+                            <p>Hi! My name is <strong>{{ author.first_name }} {{ author.last_name }}</strong>, behind the word mountains, far from the
                                 countries Vokalia and Consonantia, there live the blind texts. Separated they live in
                                 Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
                         </div>
