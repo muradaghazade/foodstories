@@ -39,6 +39,8 @@ class IndexView(TemplateView):
         context['first'] = Recipe.objects.order_by('-id')[0]
         context['author'] = User.objects.first()
         context['index_recipes'] = Recipe.objects.order_by('-id')[:4]
+        context['holidays_recipes'] = Recipe.objects.all()[:2]
+        context['category'] = Category.objects.all()[:6]
         return context
 
 class ContactView(TemplateView):

@@ -161,12 +161,12 @@
                         <div class="block-21 mb-4 d-flex">
                             <a class="blog-img mr-4" style="background-image: url({{ post.picture.url }});"></a>
                             <div class="text">
-                                <h3><a href="#">{{ post.title }}</a>
+                                <h3><a href="{% url 'inventory:recipe' post.pk %}">{{ post.title }}</a>
                                 </h3>
                                 <div class="meta">
-                                    <div><a href="#"><span class="icon-calendar"></span> {{ post.added_at | date:"j F" }}</a></div>
-                                    <div><a href="#"><span class="icon-person"></span> {{ post.author.first_name }} {{ post.author.last_name }}</a></div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                    <div><a href="{% url 'inventory:recipe' post.pk %}"><span class="icon-calendar"></span> {{ post.added_at | date:"j F" }}</a></div>
+                                    <div><a href="{% url 'inventory:recipe' post.pk %}"><span class="icon-person"></span> {{ post.author.first_name }} {{ post.author.last_name }}</a></div>
+                                    <div><a href="{% url 'inventory:recipe' post.pk %}"><span class="icon-chat"></span> 19</a></div>
                                 </div>
                             </div>
                         </div>
