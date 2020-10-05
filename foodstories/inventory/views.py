@@ -28,18 +28,19 @@ class RecipeDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         return context
 
-class IndexView(ListView):
-    model = Recipe
+class IndexView(TemplateView):
+    # model = Recipe
     # template_name_list = [['index.html', 'single.html']]
-    queryset = Recipe.objects.order_by('-id')[:4]
-    context_object_name = 'index_recipes'
-    # template_name = 'index.html'
+    # queryset = Recipe.objects.order_by('-id')[:4]
+    # context_object_name = 'index_recipes'
+    template_name = 'index.html'
 
-    def get_template_names(self):
-        return ['index.html']
+    # def get_template_names(self):
+    #     return ['index.html']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['first'] = Recipe.objects.order_by('-id')[0]
         context['author'] = User.objects.first()
+        context['index_recipes'] = Recipe.objects.order_by('-id')[:4]
         return context
