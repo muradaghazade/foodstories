@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
 
-from inventory.models import Recipe, Comments, User
+from inventory.models import Recipe, Comments, User, Category
 
 
 class RecipeView(ListView):
@@ -16,6 +16,7 @@ class RecipeView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['author'] = User.objects.first()
+        context['category'] = Category.objects.all()[:3]
         return context
 
 class RecipeDetailView(DetailView):
@@ -26,17 +27,12 @@ class RecipeDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['recent'] = Recipe.objects.order_by('-id')[:3]
+        context['category'] = Category.objects.all()[:6]
         return context
 
 class IndexView(TemplateView):
-    # model = Recipe
-    # template_name_list = [['index.html', 'single.html']]
-    # queryset = Recipe.objects.order_by('-id')[:4]
-    # context_object_name = 'index_recipes'
     template_name = 'index.html'
-
-    # def get_template_names(self):
-    #     return ['index.html']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -44,3 +40,13 @@ class IndexView(TemplateView):
         context['author'] = User.objects.first()
         context['index_recipes'] = Recipe.objects.order_by('-id')[:4]
         return context
+
+class ContactView(TemplateView):
+    template_name = 'contact.html'
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     return context
+
+class AboutView(TemplateView):
+    template_name = 'about.html'
