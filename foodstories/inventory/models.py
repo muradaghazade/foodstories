@@ -59,3 +59,18 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
     
+class ContactUs(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=300)
+    subject = models.CharField(max_length=100)
+    message = models.TextField(max_length=1000)
+
+    added_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.subject} - {self.email}'
+
+    class Meta:
+        verbose_name = 'Contact us'
+        verbose_name_plural = 'Contact us'

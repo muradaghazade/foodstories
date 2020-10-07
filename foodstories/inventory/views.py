@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, CreateView
 
-from inventory.models import Recipe, Comments, User, Category
+from inventory.models import Recipe, Comments, User, Category, ContactUs
+from .forms import ContactUsForm
+from django.urls import reverse_lazy
 
 
 class RecipeView(ListView):
@@ -43,8 +45,11 @@ class IndexView(TemplateView):
         context['category'] = Category.objects.all()[:6]
         return context
 
-class ContactView(TemplateView):
+class ContactView(CreateView):
+    model = ContactUs
     template_name = 'contact.html'
+    form_class = ContactUsForm
+    success_url = reverse_lazy('contact')
 
 
 class AboutView(TemplateView):
