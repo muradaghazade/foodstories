@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView, CreateView
 
 from inventory.models import Recipe, Comments, User, Category, ContactUs
-from .forms import ContactUsForm
+from .forms import ContactUsForm, CreateRecipeForm
 from django.urls import reverse_lazy
 
 
@@ -49,8 +49,13 @@ class ContactView(CreateView):
     model = ContactUs
     template_name = 'contact.html'
     form_class = ContactUsForm
-    success_url = reverse_lazy('contact')
+    success_url = reverse_lazy('inventory:contact')
 
+class CreateRecipeView(CreateView):
+    model = Recipe
+    template_name = 'create_story.html'
+    form_class = CreateRecipeForm
+    success_url = reverse_lazy('inventory:create_story')
 
 class AboutView(TemplateView):
     template_name = 'about.html'
