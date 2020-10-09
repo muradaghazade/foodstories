@@ -55,7 +55,10 @@ class CreateRecipeView(CreateView):
     model = Recipe
     template_name = 'create_story.html'
     form_class = CreateRecipeForm
-    success_url = reverse_lazy('inventory:create_story')
+    success_url = reverse_lazy('inventory:recipe-list')
 
 class AboutView(TemplateView):
     template_name = 'about.html'
+
+
+
