@@ -35,7 +35,7 @@
                     <p>{{ recipe_detail.text }}</p>
                     <div class="tag-widget post-tag-container mb-5 mt-5">
                         <div class="tagcloud">
-                            {% for tag in tags %}
+                            {% for tag in recipe_detail.tag.all %}
                             <a href="#" class="tag-cloud-link">{{ tag }}</a>
                             {% endfor %}
                         </div>
