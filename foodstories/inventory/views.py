@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView, CreateView
 
-from inventory.models import Recipe, Comments, User, Category, ContactUs
+from inventory.models import Recipe, Comments, User, Category, ContactUs, Tag
 from .forms import ContactUsForm, CreateRecipeForm
 from django.urls import reverse_lazy
 
@@ -31,6 +31,7 @@ class RecipeDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['recent'] = Recipe.objects.order_by('-id')[:3]
         context['category'] = Category.objects.all()[:6]
+        context['tags'] = Tag.objects.all()
         return context
 
 class IndexView(TemplateView):
