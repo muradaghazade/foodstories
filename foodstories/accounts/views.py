@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, CreateView
 from accounts.models import User
-from .forms import RegisterForm, LoginForm, ResetItDown, PasswordResetConfirmForm
-from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetConfirmView
+from .forms import RegisterForm, LoginForm, ResetItDown, PasswordResetConfirmForm, ThePasswordChangeForm
+from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetConfirmView, PasswordChangeView
 
 # Create your views here.
 class RegisterView(CreateView):
@@ -34,3 +34,8 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     template_name= "reset_password.html" 
     success_url = reverse_lazy('accounts:login')
     form_class = PasswordResetConfirmForm
+
+class ThePasswordChangeView(PasswordChangeView):
+    template_name = 'change_password.html'
+    form_class = ThePasswordChangeForm
+    success_url = reverse_lazy('accounts:login')
