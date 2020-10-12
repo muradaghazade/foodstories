@@ -77,7 +77,11 @@
                 <div class="sidebar-wrap">
                     <div class="sidebar-box p-4 about text-center ftco-animate">
                         <h2 class="heading mb-4">About Me</h2>
-                        <img src="{{ request.user.profile_pic.url }}" class="img-fluid" alt="Colorlib Template">
+                        {% if request.user.profile_pic %}
+                        <img src="{{ request.user.profile_pic.url }}" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
+                        {% else %}
+                        <img src="{% static 'images/default-profile-icon-16.jpg' %}" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
+                        {% endif %}
                         <div class="text pt-4">
                             <p>{{request.user.bio}}</p>
                         </div>
