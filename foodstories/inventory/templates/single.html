@@ -53,80 +53,44 @@
 
 
                     <div class="pt-5 mt-5">
-                        <h3 class="mb-5">6 Comments</h3>
+                        <h3 class="mb-5">{{recipe_detail.comments.count}} Comments</h3>
                         <ul class="comment-list">
+
+                            {% for comment in recipe_detail.comments.all %}
                             <li class="comment">
                                 <div class="vcard bio">
-                                    <img src="images/person_1.jpg" alt="Image placeholder">
+                                    <img src="{{comment.author.profile_pic.url}}" alt="Image placeholder">
                                 </div>
                                 <div class="comment-body">
-                                    <h3>John Doe</h3>
-                                    <div class="meta">October 03, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                                        necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim
-                                        sapiente
-                                        iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                    <h3>{{comment.author.first_name}} {{comment.author.last_name}}</h3>
+                                    <div class="meta">{{comment.added_at}}</div>
+                                    <p>{{comment.text}}</p>
                                     <p><a href="#" class="reply">Reply</a></p>
                                 </div>
                             </li>
-                            <li class="comment">
-                                <div class="vcard bio">
-                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>John Doe</h3>
-                                    <div class="meta">October 03, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                                        necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim
-                                        sapiente
-                                        iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply">Reply</a></p>
-                                </div>
-                            </li>
-                            <li class="comment">
-                                <div class="vcard bio">
-                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>John Doe</h3>
-                                    <div class="meta">October 03, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                                        necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim
-                                        sapiente
-                                        iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply">Reply</a></p>
-                                </div>
-                            </li>
-                            <li class="comment">
-                                <div class="vcard bio">
-                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>John Doe</h3>
-                                    <div class="meta">October 03, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                                        necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim
-                                        sapiente
-                                        iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply">Reply</a></p>
-                                </div>
-                            </li>
-                        </ul>
+                            {% endfor %}
+                            
                         <!-- END comment-list -->
 
                         <div class="comment-form-wrap pt-5">
+                            {% if request.user.is_authenticated %}
                             <h3 class="mb-5">Leave a comment</h3>
-                            <form action="#" class="p-5 bg-light">
+                           
+                            <form action="" class="p-5 bg-light" method="POST">
 
                                 <div class="form-group">
                                     <label for="message">Message</label>
-                                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                                    {% csrf_token %}
+                                    {{form.non_field_error}}
+                                    {{ form.text }}
+                                    {{ form.text.errors }}
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
                                 </div>
 
                             </form>
+                            {% endif %}
                         </div>
                     </div>
 
@@ -144,7 +108,7 @@
                         <ul class="categories">
                             <h3 class="heading mb-4">Categories</h3>
                             {% for c in category %}
-                            <li><a href="#">{{ c.tagname }}<span>(12)</span></a></li>
+                            <li><a href="#">{{ c.tagname }}<span>({{category.count}})</span></a></li>
                             {% endfor %}
                             <!-- <li><a href="#">Tour <span>(22)</span></a></li>
                             <li><a href="#">Destination <span>(37)</span></a></li>

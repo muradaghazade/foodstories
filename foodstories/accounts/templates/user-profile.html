@@ -20,8 +20,8 @@
                     <div class="user-profile-side-bar sidebar-wrap">
                         <div class="sidebar-box p-4 about text-center ftco-animate">
                             <h2 class="heading mb-4">About Me</h2>
-                            {% if request.user.profile_pic %}
-                        <img src="{{ request.user.profile_pic.url }}" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
+                            {% if user.profile_pic %}
+                        <img src="{{ user.profile_pic.url }}" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
                         {% else %}
                         <img src="{% static 'images/default-profile-icon-16.jpg' %}" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
                         {% endif %}
@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="sidebar-box ftco-animate user-profile">
-
+                            
                             <a href="" class="btn btn-hover-color py-2">Edit Profile</a>
 
                         </div>
@@ -54,11 +54,12 @@
                         <div class="col-md-4 ftco-animate">
                             <div class="blog-entry">
                                 <a class="img-2">
-
+                                    {% if recipe.author == request.user %}
                                     <div class="user-events__edit">
-                                        <button type="button" class="edit-event"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                        <button type="button" class="delete-event"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                        <a href="{% url 'inventory:edit_story' recipe.pk %}" type="button" class="edit-event"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        <a href="{% url 'inventory:delete_story' recipe.pk %}" type="button" class="edit-event"><i class="fa fa-trash" aria-hidden="true"></i></a> 
                                     </div>
+                                    {% endif %}
 
                                     <img src="{{ recipe.picture.url }}" class="img-fluid" alt="Colorlib Template">
                                 </a>

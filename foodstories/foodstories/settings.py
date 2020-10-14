@@ -85,9 +85,18 @@ WSGI_APPLICATION = 'foodstories.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'foodstories',
+        'USER': 'muradaghazada',
+        'PASSWORD': '885522',
+        'PORT': '5432',
+        'HOST': '127.0.0.1'
     }
 }
 

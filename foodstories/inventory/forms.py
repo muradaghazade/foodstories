@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContactUs, Recipe
+from .models import ContactUs, Recipe, Comments
 
 class ContactUsForm(forms.ModelForm):
     class Meta:
@@ -16,13 +16,21 @@ class ContactUsForm(forms.ModelForm):
 class CreateRecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        fields = ['title', 'description', 'text', 'picture', 'category', 'author']
+        fields = ['title', 'description', 'text', 'picture', 'category', ]
 
         widgets = {
             'title': forms.TextInput(attrs={'id': 'title', 'placeholder': 'Title', 'class': 'form-control'}),
-            'description': forms.Textarea(attrs={'id': 'description', 'placeholder': 'Description', 'class': 'form-control'}),
-            'text': forms.Textarea(attrs={'id': 'text', 'placeholder': 'Text', 'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'id': 'Short description', 'placeholder': 'Description', 'class': 'form-control'}),
+            'text': forms.Textarea(attrs={'id': 'text', 'placeholder': 'Description', 'class': 'form-control'}),
             'picture': forms.FileInput(attrs={'id': 'picture', 'placeholder': 'Picture', 'class': 'form-control'}),
             'category': forms.Select(attrs={'id': 'category', 'placeholder': 'Category', 'class': 'form-control'}),
-            'author': forms.Select(attrs={'id': 'author', 'placeholder': 'Author', 'class': 'form-control'}),
+        }
+
+class CreateCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comments
+        fields = ['text']
+
+        widgets = {
+            'text': forms.Textarea(attrs={'id': 'Text', 'placeholder': 'Enter Text', 'class': 'form-control'}),
         }

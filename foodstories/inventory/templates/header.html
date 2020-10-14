@@ -17,7 +17,7 @@
                     <li class="nav-item"><a href="{% url 'inventory:contact' %}" class="nav-link">Contact</a></li>
                     {% if request.user.is_authenticated %}
                     
-                    <li class="nav-item"><a href="{% url 'accounts:user-profile'  user.pk  %}" class="nav-link">
+                    <li class="nav-item"><a href="{% url 'accounts:user-profile'  request.user.pk  %}" class="nav-link">
                         {% if request.user.profile_pic %}
                         <img src="{{ request.user.profile_pic.url }}" style="width: 30px; height: 30px; border-radius: 50%;" alt="">
                         {% else %}
