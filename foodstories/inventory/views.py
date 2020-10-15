@@ -39,9 +39,17 @@ class RecipeView(ListView):
 class RecipeDetailView(FormMixin, DetailView):
     model = Recipe
     context_object_name = 'recipe_detail'
-    queryset = Recipe.objects.all()
     form_class = CreateCommentForm
     template_name = 'single.html'
+
+    def get_queryset(self):
+        tag = self.request.GET.get('tag')
+
+        if tag:
+            queryset = Recipe.objects.filter(tag=tag)
+        else:
+            queryset = Recipe.objects.all()
+        return queryset
 
     def get_success_url(self):
         return reverse_lazy('inventory:recipe', kwargs={'pk':self.get_object().id})
