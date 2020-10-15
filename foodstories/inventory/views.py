@@ -9,18 +9,31 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormMixin
 from django.core.exceptions import PermissionDenied
+from django.db.models import Count
 
 class RecipeView(ListView):
     model = Recipe
     context_object_name = 'recipe_list'
-    queryset = Recipe.objects.order_by('-id')
     template_name = 'recipes.html'
     paginate_by = 3
+
+    def get_queryset(self):
+        category = self.request.GET.get('category')
+        title = self.request.GET.get('title')
+        print(title)
+        
+        if title:
+            queryset = Recipe.objects.filter(title__icontains=title)
+        elif category:
+            queryset = Recipe.objects.filter(category__tagname=category)
+        else:
+            queryset = Recipe.objects.order_by('-id')
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['author'] = User.objects.first()
-        context['category'] = Category.objects.all()[:3]
+        context['category'] = Category.objects.all()
         return context
 
 class RecipeDetailView(FormMixin, DetailView):
@@ -43,7 +56,7 @@ class RecipeDetailView(FormMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['recent'] = Recipe.objects.order_by('-id')[:3]
-        context['category'] = Category.objects.all()[:6]
+        context['category'] = Category.objects.annotate(recipe_count=Count('recipe')).filter(recipe_count__gt=0)
         context['tags'] = Tag.objects.all()
         context['len'] = len(Recipe.objects.all())
         return context
@@ -63,7 +76,7 @@ class IndexView(TemplateView):
         context['author'] = User.objects.first()
         context['index_recipes'] = Recipe.objects.order_by('-id')[:4]
         context['holidays_recipes'] = Recipe.objects.all()[:2]
-        context['category'] = Category.objects.all()[:6]
+        context['category'] = Category.objects.all()
         return context
 
 class ContactView(CreateView):
