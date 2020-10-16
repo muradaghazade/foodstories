@@ -76,3 +76,13 @@ class ContactUs(models.Model):
     class Meta:
         verbose_name = 'Contact us'
         verbose_name_plural = 'Contact us'
+
+class Subscribe(models.Model):
+    email = models.EmailField(max_length=400, unique=True)
+    
+    class Meta:
+        verbose_name = 'Subscribe'
+        verbose_name_plural = 'Subscribes'
+
+    def __str__(self):
+        return f'{self.email}'

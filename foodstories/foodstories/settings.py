@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     #Local apps
     'inventory.apps.InventoryConfig',
     'accounts.apps.AccountsConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

@@ -65,7 +65,7 @@
                                     <h3>{{comment.author.first_name}} {{comment.author.last_name}}</h3>
                                     <div class="meta">{{comment.added_at}}</div>
                                     <p>{{comment.text}}</p>
-                                    <p><a href="#" class="reply">Reply</a></p>
+                                    <!-- <p><a href="#" class="reply">Reply</a></p> -->
                                 </div>
                             </li>
                             {% endfor %}
@@ -110,11 +110,6 @@
                             {% for c in category %}
                             <li><a href="{% url 'inventory:recipe-list' %}?category={{c.tagname}}">{{ c.tagname }}<span>({{ c.recipe.count }})</span></a></li>
                             {% endfor %}
-                            <!-- <li><a href="#">Tour <span>(22)</span></a></li>
-                            <li><a href="#">Destination <span>(37)</span></a></li>
-                            <li><a href="#">Drinks <span>(42)</span></a></li>
-                            <li><a href="#">Foods <span>(14)</span></a></li>
-                            <li><a href="#">Travel <span>(140)</span></a></li> -->
                         </ul>
                     </div>
 
@@ -129,7 +124,7 @@
                                 <div class="meta">
                                     <div><a href="{% url 'inventory:recipe' post.pk %}"><span class="icon-calendar"></span> {{ post.added_at | date:"j F" }}</a></div>
                                     <div><a href="{% url 'inventory:recipe' post.pk %}"><span class="icon-person"></span> {{ post.author.first_name }} {{ post.author.last_name }}</a></div>
-                                    <div><a href="{% url 'inventory:recipe' post.pk %}"><span class="icon-chat"></span> 19</a></div>
+                                    <div><a href="{% url 'inventory:recipe' post.pk %}"><span class="icon-chat"></span> {{post.comments.count }}</a></div>
                                 </div>
                             </div>
                         </div>
@@ -140,7 +135,7 @@
                         <h3 class="heading mb-4">Tag Cloud</h3>
                         <div class="tagcloud">
                             {% for tag in tags %}
-                            <a href="#" class="tag-cloud-link">{{ tag }}</a>
+                            <a href="{% url 'inventory:recipe-list' %}?tag={{tag.name}}" class="tag-cloud-link">{{ tag }}</a>
                             {% endfor %}
                         </div>
                     </div>

@@ -22,6 +22,7 @@ urlpatterns = [
     path('', include('inventory.urls', namespace='inventory')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('admin/', admin.site.urls),
+    path('api/v1/', include('inventory.api.urls')),
 ]
 
 if settings.DEBUG:

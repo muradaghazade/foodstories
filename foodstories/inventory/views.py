@@ -20,12 +20,15 @@ class RecipeView(ListView):
     def get_queryset(self):
         category = self.request.GET.get('category')
         title = self.request.GET.get('title')
-        print(title)
+        tag = self.request.GET.get('tag')
         
         if title:
             queryset = Recipe.objects.filter(title__icontains=title)
         elif category:
             queryset = Recipe.objects.filter(category__tagname=category)
+        elif tag:
+            queryset = Recipe.objects.filter(tag__name__icontains=tag)
+            print(queryset)
         else:
             queryset = Recipe.objects.order_by('-id')
         return queryset
@@ -41,15 +44,6 @@ class RecipeDetailView(FormMixin, DetailView):
     context_object_name = 'recipe_detail'
     form_class = CreateCommentForm
     template_name = 'single.html'
-
-    def get_queryset(self):
-        tag = self.request.GET.get('tag')
-
-        if tag:
-            queryset = Recipe.objects.filter(tag=tag)
-        else:
-            queryset = Recipe.objects.all()
-        return queryset
 
     def get_success_url(self):
         return reverse_lazy('inventory:recipe', kwargs={'pk':self.get_object().id})
