@@ -37,6 +37,11 @@
                         <div class="sidebar-box ftco-animate user-profile">
                             <a href="{% url 'inventory:create_story' %}" class="btn btn-hover-color py-2">Create recipe </a>
                         </div>
+                        {% if user == request.user %}
+                        <div class="sidebar-box ftco-animate user-profile">
+                            <a href="{% url 'accounts:log-out' %}" class="btn btn-hover-color py-2">Log out </a>
+                        </div>
+                        {% endif %}
 
                     </div>
                 </div>
