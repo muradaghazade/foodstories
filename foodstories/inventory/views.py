@@ -93,14 +93,6 @@ class CreateRecipeView(LoginRequiredMixin, CreateView):
     form_class = CreateRecipeForm
     success_url = reverse_lazy('inventory:recipe-list')
 
-    # def post(self, request, *args, **kwargs):
-    #     print('1-----------', self.get_form().data.description)
-    #     if self.get_form().is_valid():
-    #         print('2----------')
-    #     else:
-    #         print('3----------')
-
-    #     return super().post(request, *args, **kwargs)
 
     def form_valid(self, form):
         form.instance.author = self.request.user

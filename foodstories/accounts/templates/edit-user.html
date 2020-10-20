@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block title %}
+    <title>Stories - Free Bootstrap 4 Template by Colorlib</title>
+    {% endblock %}
+    
+    {% block css %}
+    {% endblock %}
+
+    {% block content %}
+
+<!-- END nav -->
+<section class="ftco-section contact-section register">
+        <div class="container">
+            <div class="row block-9 justify-content-center">
+                <div class="col-md-6 order-md-last d-flex">
+                    <form action="" class="bg-light p-5 contact-form" method="POST" enctype="multipart/form-data">
+                        <a class="navbar-brand center" href="#">Stories<span>.</span></a>
+                        {% csrf_token %}
+                        {{form.non_field_error}}
+                        <div class="form-group">
+                            {{form.first_name}}
+                            {{form.first_name.errors}}
+                        </div>
+                        <div class="form-group">
+                            {{form.last_name}}
+                            {{form.last_name.errors}}
+                        </div>
+                        <div class="form-group">
+                            {{form.username}}
+                            {{form.username.errors}}
+                        </div>
+                        <div class="form-group">
+                            {{form.bio}}
+                            {{form.bio.errors}}
+                        </div>
+                        <div class="form-group">
+                            {{form.profile_pic}}
+                            {{form.profile_pic.errors}}
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Register" class="btn btn-primary py-3 px-5">
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00"/>
+    </svg>
+</div>
+{% endblock %}
+
+    {% block js %}
+    {% endblock %}

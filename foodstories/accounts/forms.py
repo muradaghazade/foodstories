@@ -98,3 +98,16 @@ class ThePasswordChangeForm(PasswordChangeForm):
 
     class Meta:
         fields = ("old_password", 'new_password1', 'new_password2', )
+
+class UpdateProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'bio', 'profile_pic']
+
+        widgets = {
+            'first_name': forms.TextInput(attrs={'id': 'first_name', 'placeholder': 'First Name',  'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'id': 'last_name', 'placeholder': 'Last Name',  'class': 'form-control'}),
+            'username': forms.TextInput(attrs={'id': 'username', 'placeholder': 'Your Username',  'class': 'form-control'}),
+            'bio': forms.Textarea(attrs={'id': 'bio', 'placeholder': 'Bio',  'class': 'form-control'}),
+            'profile_pic': forms.FileInput(attrs={'id': 'profile_pic', 'placeholder': 'Profile Picture',  'class': 'form-control'}),
+        }
